@@ -1,8 +1,8 @@
-import styles from "./Sorter.module.scss";
-import options from "./options.json";
-import { useState } from "react";
-import classNames from "classnames";
-import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
+import styles from './Sorter.module.scss';
+import options from './options.json';
+import { useState } from 'react';
+import classNames from 'classnames';
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
 
 interface Props {
   sorter: string;
@@ -18,12 +18,12 @@ export default function Sorter({ sorter, setSorter }: Props) {
     <button
       className={classNames({
         [styles.ordenador]: true,
-        [styles.ordenador__ativo]: sorter !== "",
+        [styles.ordenador__ativo]: sorter !== '',
       })}
       onClick={() => setOpen(!open)}
       onBlur={() => setOpen(false)}
     >
-      <span>{sorterName || "Ordenar por"}</span>
+      <span>{sorterName || 'Ordenar por'}</span>
       {open ? (
         <MdKeyboardArrowUp size={20} />
       ) : (

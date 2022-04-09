@@ -1,7 +1,9 @@
-import items from "./items.json";
-import Item from "./Item";
-import styles from "./ListItem.module.scss";
-import { useEffect, useState } from "react";
+/* eslint-disable indent */
+import menu from 'data/menu.json';
+import Item from './Item';
+import styles from './ListItem.module.scss';
+import { useEffect, useState } from 'react';
+import { MenuType } from 'types/Plates';
 
 interface Props {
   sorter: string;
@@ -10,10 +12,10 @@ interface Props {
 }
 
 export default function ListItem({ filter, sorter, search }: Props) {
-  const [list, setList] = useState(items);
+  const [list, setList] = useState(menu);
 
   function searchItem(title: string) {
-    const regex = new RegExp(search, "i");
+    const regex = new RegExp(search, 'i');
 
     return regex.test(title);
   }
@@ -25,13 +27,13 @@ export default function ListItem({ filter, sorter, search }: Props) {
     return true;
   }
 
-  function sorterItem(list: typeof items) {
+  function sorterItem(list: MenuType) {
     switch (sorter) {
-      case "porcao":
+      case 'porcao':
         return list.sort((a, b) => (a.size > b.size ? 1 : -1));
-      case "qtd_pessoas":
+      case 'qtd_pessoas':
         return list.sort((a, b) => (a.serving > b.serving ? 1 : -1));
-      case "preco":
+      case 'preco':
         return list.sort((a, b) => (a.price > b.price ? 1 : -1));
       default:
         return list;
@@ -39,7 +41,7 @@ export default function ListItem({ filter, sorter, search }: Props) {
   }
 
   useEffect(() => {
-    const newList = items.filter(
+    const newList = menu.filter(
       (item) => searchItem(item.title) && filterItem(item.category.id)
     );
     setList(sorterItem(newList));

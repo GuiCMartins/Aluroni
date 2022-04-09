@@ -1,6 +1,6 @@
-import filters from "./filters.json";
-import styles from "./Filter.module.scss";
-import classNames from "classnames";
+import filters from './filters.json';
+import styles from './Filter.module.scss';
+import classNames from 'classnames';
 
 type IOption = typeof filters[0];
 

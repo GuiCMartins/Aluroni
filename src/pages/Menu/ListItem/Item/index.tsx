@@ -1,15 +1,19 @@
-import styles from "./Item.module.scss";
-import Items from "../items.json";
-import classNames from "classnames";
+import styles from './Item.module.scss';
+import { PlateType } from 'types/Plates';
+import PlateTags from 'components/PlateTags';
+import { useNavigate } from 'react-router-dom';
 
-type Props = typeof Items[0];
-
-export default function Item(item: Props) {
-  const { category, title, description, id, photo, price, serving, size } =
-    item;
+export default function Item(item: PlateType) {
+  const { title, description, photo, id } = item;
+  const navigate = useNavigate();
 
   return (
-    <div className={styles.item}>
+    <div
+      className={styles.item}
+      onClick={() => {
+        navigate(`/prato/${id}`);
+      }}
+    >
       <div className={styles.item__imagem}>
         <img src={photo} alt={title}></img>
       </div>
@@ -18,21 +22,7 @@ export default function Item(item: Props) {
           <h2>{title}</h2>
           <p>{description}</p>
         </div>
-        <div className={styles.item__tags}>
-          <div
-            className={classNames({
-              [styles.item__tipo]: true,
-              [styles[`item__tipo__${category.label.toLowerCase()}`]]: true,
-            })}
-          >
-            {category.label}
-          </div>
-          <div className={styles.item__porcao}>{size} g</div>
-          <div className={styles.item__qtdpessoas}>
-            Serve {serving} {`pessoa${serving === 1 ? "" : "s"}`}
-          </div>
-          <div className={styles.item__valor}>R$ {price.toFixed(2)}</div>
-        </div>
+        <PlateTags {...item} />
       </div>
     </div>
   );
